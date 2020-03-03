@@ -1,40 +1,52 @@
 import cypher.*;
 import java.util.*;
+import java.io.*;
 import static java.lang.System.*;
 public class T9
 {
     private static final String root = "src/dictionary/";
 
-    private static void menu()
-    {
-        out.println("0. encode");
-        out.println("1. decode");
-        out.println("exit ");
-    }
 
-    public static void main(String [] args)
+    private static void handleChoices(Cypher cy, int choice)
     {
-        Cypher cy = new Cypher(root+"words.txt", root+"names.txt");
         Scanner s = new Scanner(in);
         String word;
-        menu();
-        s.nextLine();
-        int choice = s.nextInt();
-
         switch (choice)
         {
             case 0:
+                out.print("encode: ");
                 word = s.nextLine();
-                cy.encode(word);
+                out.println(cy.encode(word));
                 break;
             case 1:
-                out.print("$");
+                out.print("decode: ");
                 word = s.nextLine();
-                cy.decode(word);
+                out.println(cy.decode(word));
                 break;
             default:
                 exit(0);
         }
         s.close();
+    }
+    static String[] getSources(File f)
+    {
+        List<String> names = new ArrayList<>();
+        if (f.isDirectory())
+        {
+            File [] files = f.listFiles();
+            assert files != null;
+            for (File x: files)
+            {
+                names.add(root+x.getName());
+            }
+        }
+        String [] ret = new String[names.size()];
+        return names.toArray(ret);
+    }
+    public static void main(String [] args)
+    {
+        String [] source = getSources(new File(root));
+        Cypher cy = new Cypher(source);
+        out.println(cy.decode("2526"));
     }
 }
