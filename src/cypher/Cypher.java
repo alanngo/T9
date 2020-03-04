@@ -38,8 +38,15 @@ public class Cypher
         }
         return ret;
     }
+
+    //TODO: implement a better algorithm than user choice
     private static String chooseWord(@NotNull Collection<String> possibleWords)
     {
+        if (possibleWords.size()==1)
+        {
+            String [] singleton = new String[possibleWords.size()];
+            return possibleWords.toArray(singleton)[0];
+        }
         Scanner s = new Scanner(in);
 
         out.print("Choose a word from "+possibleWords+": ");
@@ -67,8 +74,8 @@ public class Cypher
     private Map<String, String> dictionary;
 
 
-    //package constructor
-    Cypher()
+    //protected constructor
+    protected Cypher()
     {
         encodeTable = new HashMap<>();
         dictionary = new HashMap<>();
@@ -96,12 +103,14 @@ public class Cypher
         }
     }
 
-    public String encode(String str)
+    public String encode(@NotNull String str)
     {
-        String message = str.toLowerCase();
+        String message = str.toLowerCase(); //make case insensitive
         StringBuilder sb = new StringBuilder();
+
         for (char c: message.toCharArray())
         {
+            //add normal characters
             if (encodeTable.containsKey(c))
                 sb.append(encodeTable.get(c));
 
@@ -117,7 +126,7 @@ public class Cypher
      * @param str the encoded T9 string
      * @return the decoded string
     * */
-    public String decode(String str)
+    public String decode(@NotNull String str)
     {
         StringBuilder sb = new StringBuilder();
         String[] words = str.split("0"); //split at spaces
@@ -125,8 +134,8 @@ public class Cypher
         for (String encoded: words)
         {
             Collection<String> possibleWords = enumerate(dictionary, encoded);
-           String word = chooseWord(possibleWords);
-           sb.append(word).append(" ");
+            String word = chooseWord(possibleWords);
+            sb.append(word).append(" ");
         }
         return sb.toString();
     }

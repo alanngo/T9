@@ -1,11 +1,12 @@
 import cypher.*;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.io.*;
 import static java.lang.System.*;
 public class T9
 {
     private static final String root = "src/dictionary/";
-
 
     private static void handleChoices(Cypher cy, int choice)
     {
@@ -28,7 +29,8 @@ public class T9
         }
         s.close();
     }
-    static String[] getSources(File f)
+    @NotNull
+    static String[] getSources(@NotNull File f)
     {
         List<String> names = new ArrayList<>();
         if (f.isDirectory())
@@ -36,9 +38,8 @@ public class T9
             File [] files = f.listFiles();
             assert files != null;
             for (File x: files)
-            {
                 names.add(root+x.getName());
-            }
+
         }
         String [] ret = new String[names.size()];
         return names.toArray(ret);
@@ -47,6 +48,6 @@ public class T9
     {
         String [] source = getSources(new File(root));
         Cypher cy = new Cypher(source);
-        out.println(cy.decode("2526"));
+        out.println(cy.decode("25260222"));
     }
 }
