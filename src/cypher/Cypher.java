@@ -1,7 +1,6 @@
 package cypher;
 
-
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.*;
 
 import java.io.*;
 import java.util.*;
@@ -13,7 +12,6 @@ public class Cypher
 {
     //static helper functions/members
     private static final String[] LETTERS = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-
     private static boolean IS_STRAY_CHARS(char c)
     {
         String STRAY_CHAR ="!@#$%^&*()-+,.?<>/";
@@ -39,8 +37,11 @@ public class Cypher
         return ret;
     }
 
-    //TODO: implement a better algorithm than user choice
-    private static String chooseWord(@NotNull Collection<String> possibleWords)
+
+    /***different implementations for decoding algorithm**/
+
+    //user choice
+    private static String chooseWordUser(@NotNull Collection<String> possibleWords)
     {
         if (possibleWords.size()==1)
         {
@@ -59,6 +60,16 @@ public class Cypher
         return "";
     }
 
+    //random
+    private static String chooseWordRandom(@NotNull Collection<String> possibleWords)
+    {
+        Random r = new Random();
+        String ret;
+        String [] arr = new String [possibleWords.size()];
+        arr = possibleWords.toArray(arr);
+        ret = arr[r.nextInt(arr.length)];
+        return ret;
+    }
 
     //non static helper functions/members
     /**
@@ -74,8 +85,8 @@ public class Cypher
     private Map<String, String> dictionary;
 
 
-    //protected constructor
-    protected Cypher()
+    //default constructor
+    public Cypher()
     {
         encodeTable = new HashMap<>();
         dictionary = new HashMap<>();
@@ -93,7 +104,7 @@ public class Cypher
         }
     }
 
-    public Cypher(@NotNull String ...args)
+    public Cypher(@NotNull String ... args)
     {
         this();
         for (String arg: args)
@@ -134,7 +145,7 @@ public class Cypher
         for (String encoded: words)
         {
             Collection<String> possibleWords = enumerate(dictionary, encoded);
-            String word = chooseWord(possibleWords);
+            String word = chooseWordRandom(possibleWords);
             sb.append(word).append(" ");
         }
         return sb.toString();

@@ -46,8 +46,10 @@ public class T9
     }
     public static void main(String [] args)
     {
+        String testTxt = root+"test.txt";
         String [] source = getSources(new File(root));
         Cypher cy = new Cypher(source);
-        out.println(cy.decode("25260222"));
+        out.println(cy.encode("apples and oranges"));
+        out.println(cy.decode("277537026306726437"));
     }
 }

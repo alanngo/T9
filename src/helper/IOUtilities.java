@@ -1,12 +1,14 @@
 package helper;
 
 import cypher.*;
+import org.jetbrains.annotations.*;
 
 import java.io.*;
 import java.util.*;
 
 public class IOUtilities
 {
+    @NotNull
     public static Map<String, String> readFile(File fi)
     {
         Map<String, String> ret = new HashMap<>();
