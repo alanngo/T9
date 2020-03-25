@@ -14,11 +14,10 @@ public class IOUtilities
         Map<String, String> ret = new HashMap<>();
 
         Scanner s = null;
-        Cypher cy;
+        Cypher cy = new Cypher();
         try
         {
             s = new Scanner(fi);
-            cy = new Cypher();
 
             while (s.hasNextLine())
             {

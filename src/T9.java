@@ -6,7 +6,7 @@ import java.io.*;
 import static java.lang.System.*;
 public class T9
 {
-    private static final String root = "src/dictionary/";
+    static final String root = "src/dictionary/";
 
     private static void handleChoices(Cypher cy, int choice)
     {
@@ -41,8 +41,7 @@ public class T9
                 names.add(root+x.getName());
 
         }
-        String [] ret = new String[names.size()];
-        return names.toArray(ret);
+        return names.toArray(new String[names.size()]);
     }
     public static void main(String [] args)
     {
@@ -50,6 +49,6 @@ public class T9
         String [] source = getSources(new File(root));
         Cypher cy = new Cypher(source);
         out.println(cy.encode("apples and oranges"));
-        out.println(cy.decode("277537026306726437"));
+        out.println(cy.decode("2526"));
     }
 }
