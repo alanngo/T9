@@ -1,13 +1,14 @@
 package cypher;
 
-import com.sun.istack.internal.*;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
-import java.io.*;
-import java.util.*;
-
-import static helper.IOUtilities.*;
-import static java.util.Map.*;
-import static cypher.Implementations.*;
+import static cypher.Implementations.chooseWordRandom;
+import static helper.IOUtilities.readFile;
+import static java.util.Map.Entry;
 
 public class Cypher
 {
@@ -24,10 +25,13 @@ public class Cypher
         return false;
     }
 
-    @NotNull
-    private static Collection<String> enumerate(@NotNull Map<String, String> dictionary, String encoded)
+
+
+    private static Collection<String> enumerate(Map<String, String> dictionary, String encoded)
     {
-        Collection<String> ret = new ArrayList<>();
+        if (dictionary==null|| encoded == null)
+            throw new NullPointerException("dictionary is null");
+        Collection<String> ret = new HashSet<>();
         for (Entry<String, String> e: dictionary.entrySet())
         {
             String og = e.getKey();
@@ -43,13 +47,13 @@ public class Cypher
      * @Key: unencrypted character
      * @Value: numerical representation of the character
      * */
-    private Map<Character, Integer> encodeTable;
+    private final Map<Character, Integer> encodeTable;
 
     /**
      * @Key: original string
      * @Value: encoded string
      * */
-    private Map<String, String> dictionary;
+    private final Map<String, String> dictionary;
 
     //default constructor
     public Cypher()
@@ -70,9 +74,11 @@ public class Cypher
         }
     }
 
-    public Cypher(@NotNull String ... args)
+    public Cypher( String ... args)
     {
         this();
+        if (args== null)
+            throw new NullPointerException("args is null");
         for (String arg: args)
         {
             Map<String, String> tmp = readFile(new File(arg));
@@ -80,8 +86,10 @@ public class Cypher
         }
     }
 
-    public String encode(@NotNull String str)
+    public String encode(String str)
     {
+        if (str == null)
+            throw new NullPointerException("str is null");
         String message = str.toLowerCase(); //make case insensitive
         StringBuilder sb = new StringBuilder();
 
@@ -103,8 +111,10 @@ public class Cypher
      * @param str the encoded T9 string
      * @return the decoded string
     * */
-    public String decode(@NotNull String str)
+    public String decode(String str)
     {
+        if (str==null)
+            throw new NullPointerException("str is null");
         StringBuilder sb = new StringBuilder();
         String[] words = str.split("0"); //split at spaces
 

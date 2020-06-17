@@ -9,27 +9,6 @@ public class T9
 {
     static final String root = "src/dictionary/";
 
-    private static void handleChoices(Cypher cy, int choice)
-    {
-        Scanner s = new Scanner(in);
-        String word;
-        switch (choice)
-        {
-            case 0:
-                out.print("encode: ");
-                word = s.nextLine();
-                out.println(cy.encode(word));
-                break;
-            case 1:
-                out.print("decode: ");
-                word = s.nextLine();
-                out.println(cy.decode(word));
-                break;
-            default:
-                exit(0);
-        }
-        s.close();
-    }
     @NotNull
     static String[] getSources(@NotNull File f)
     {
@@ -42,7 +21,7 @@ public class T9
                 names.add(root+x.getName());
 
         }
-        return names.toArray(new String[names.size()]);
+        return names.toArray(new String[0]);
     }
     public static void main(String [] args)
     {

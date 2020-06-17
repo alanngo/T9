@@ -6,8 +6,7 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
+import static java.lang.System.*;
 
 public class Implementations
 {
@@ -33,7 +32,7 @@ public class Implementations
         return "";
     }
 
-    //random
+    //random using dictionary
     static String chooseWordRandom(@NotNull Collection<String> possibleWords)
     {
         Random r = new Random();

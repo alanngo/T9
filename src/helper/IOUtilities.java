@@ -12,6 +12,8 @@ public class IOUtilities
 
     public static Map<String, String> readFile(File fi)
     {
+        if (fi==null)
+            throw new NullPointerException("fi is null");
         Map<String, String> ret = new HashMap<>();
 
         Scanner s = null;
