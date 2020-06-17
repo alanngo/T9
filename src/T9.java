@@ -1,8 +1,9 @@
-import cypher.*;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
+import cypher.Cypher;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
+
 import static java.lang.System.*;
 public class T9
 {
@@ -45,10 +46,9 @@ public class T9
     }
     public static void main(String [] args)
     {
-        String testTxt = root+"test.txt";
         String [] source = getSources(new File(root));
         Cypher cy = new Cypher(source);
         out.println(cy.encode("apples and oranges"));
-        out.println(cy.decode("2526"));
+        out.println(cy.decode("222"));
     }
 }

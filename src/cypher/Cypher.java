@@ -1,12 +1,13 @@
 package cypher;
 
-import org.jetbrains.annotations.*;
+import com.sun.istack.internal.*;
 
 import java.io.*;
 import java.util.*;
-import static java.util.Map.Entry;
-import static java.lang.System.*;
+
 import static helper.IOUtilities.*;
+import static java.util.Map.*;
+import static cypher.Implementations.*;
 
 public class Cypher
 {
@@ -37,40 +38,6 @@ public class Cypher
         return ret;
     }
 
-
-    /***different implementations for decoding algorithm**/
-
-    //user choice
-    private static String chooseWordUser(@NotNull Collection<String> possibleWords)
-    {
-        if (possibleWords.size()==1)
-        {
-            String [] singleton = new String[possibleWords.size()];
-            return possibleWords.toArray(singleton)[0];
-        }
-        Scanner s = new Scanner(in);
-
-        out.print("Choose a word from "+possibleWords+": ");
-        String word = s.nextLine();
-
-        if (possibleWords.contains(word))
-            return word;
-
-        s.close();
-        return "";
-    }
-
-    //random
-    private static String chooseWordRandom(@NotNull Collection<String> possibleWords)
-    {
-        Random r = new Random();
-        String ret;
-        String [] arr = new String [possibleWords.size()];
-        arr = possibleWords.toArray(arr);
-        ret = arr[r.nextInt(arr.length)];
-        return ret;
-    }
-
     //non static helper functions/members
     /**
      * @Key: unencrypted character
@@ -83,7 +50,6 @@ public class Cypher
      * @Value: encoded string
      * */
     private Map<String, String> dictionary;
-
 
     //default constructor
     public Cypher()

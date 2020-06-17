@@ -1,9 +1,10 @@
-import cypher.*;
-import org.jetbrains.annotations.*;
+import com.sun.istack.internal.NotNull;
+import cypher.Cypher;
 
-import java.io.*;
+import java.io.File;
 
-import static java.lang.System.*;
+import static java.lang.System.err;
+import static java.lang.System.out;
 public class TestT9
 {
     private static int count = 0;
